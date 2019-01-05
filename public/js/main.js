@@ -3,7 +3,7 @@ import {createCollisionLayer} from "./layers.js";
 import {createPikachu} from "./entities.js";
 import {setupKeyboard} from "./input.js";
 import Timer from "./Timer.js";
-
+import Camera from "./Camera.js";
 
 import KeyboardState from "./KeyboardState.js";
 const canvas = document.getElementById('screen');
@@ -17,7 +17,8 @@ Promise.all([
     loadLevel('1-1'),
 ])
 .then(([pikachu, level]) => {
-   
+   const camera = new Camera();
+   window.camera = camera;
    
     pikachu.pos.set(20,56);
     
@@ -44,7 +45,7 @@ Promise.all([
 
     timer.update = function update(deltaTime) {     
         level.update(deltaTime);
-        level.comp.draw(context);
+        level.comp.draw(context, camera);
     }
    
         timer.start();
