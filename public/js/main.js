@@ -4,8 +4,6 @@ import {createPikachu} from "./entities.js";
 import {setupKeyboard} from "./input.js";
 import Timer from "./Timer.js";
 
-
-import KeyboardState from "./KeyboardState.js";
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
