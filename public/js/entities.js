@@ -16,7 +16,7 @@ export function createPikachu() {
             pikachu.addTrait(new Go());
            
             pikachu.draw = function drawPikachu(context) {
-                pikachuSprite.draw('idle', context, this.pos.x, this.pos.y);   
+                pikachuSprite.draw('idle', context, 0, 0);   
             }
            
 

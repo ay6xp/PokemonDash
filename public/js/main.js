@@ -4,8 +4,7 @@ import {createPikachu} from "./entities.js";
 import {setupKeyboard} from "./input.js";
 import Timer from "./Timer.js";
 import Camera from "./Camera.js";
-
-import KeyboardState from "./KeyboardState.js";
+import {setupMouseControl} from "./debug.js";
 const canvas = document.getElementById('screen');
 const context = canvas.getContext('2d');
 
@@ -24,21 +23,11 @@ Promise.all([
     
     level.entities.add(pikachu);
     level.comp.layers.push(createCollisionLayer(level));
-
-    const input = setupKeyboard(pikachu);
-    
+    setupMouseControl(canvas, pikachu, camera);
+    const input = setupKeyboard(pikachu);    
    
 
     input.listenTo(window);
-
-    // ['mousedown','mousemove'].forEach(eventName => {
-    //     canvas.addEventListener(eventName, event=> {
-    //         if (event.buttons === 1) {
-    //             pikachu.vel.set(0,0);
-    //             pikachu.pos.set(event.offsetX, event.offsetY);
-    //         }
-    //     });
-    // });
 
 
     const timer = new Timer(1/60);

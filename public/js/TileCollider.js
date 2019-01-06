@@ -9,7 +9,7 @@ export default class TileCollider {
         let y;
         if (entity.vel.y > 0) {
             y = entity.pos.y + entity.size.y;
-        } else if (entity.vel.x < 0) {
+        } else if (entity.vel.y < 0) {
             y = entity.pos.y;
         } else{
             return;
