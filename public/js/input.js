@@ -1,20 +1,24 @@
 import KeyboardState from "./KeyboardState.js";
-export function setupKeyboard(entity) {
+export function setupKeyboard(pikachu) {
    
     const input = new KeyboardState();
     input.addMapping('Space', keyState => {
         if (keyState) {
-            entity.jump.start();
+            pikachu.jump.start();
         } else {
-            entity.jump.cancel();
+            pikachu.jump.cancel();
         }
     });
     input.addMapping('ArrowRight', keyState => {
-        entity.go.dir += keyState ? 1 : -1;
+        pikachu.go.dir += keyState ? 1 : -1;
     });
 
     input.addMapping('ArrowLeft', keyState => {
-        entity.go.dir += keyState ? -1 : 1;
+        pikachu.go.dir += keyState ? -1 : 1;
     });
+
+    // input.addMapping('KeyO', keyState => {
+    //     pikachu.turbo();
+    // });
     return input;
 }
