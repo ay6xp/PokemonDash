@@ -22,9 +22,9 @@ Promise.all([
     pikachu.pos.set(20,56);
     
     level.entities.add(pikachu);
-    level.comp.layers.push(createCollisionLayer(level), createCameraLayer(camera));
+    //level.comp.layers.push(createCollisionLayer(level), createCameraLayer(camera));
    
-    setupMouseControl(canvas, pikachu, camera);
+  
     const input = setupKeyboard(pikachu);    
    
 
@@ -35,6 +35,9 @@ Promise.all([
 
     timer.update = function update(deltaTime) {     
         level.update(deltaTime);
+        if (pikachu.pos.x > 100) {
+            camera.pos.x = pikachu.pos.x - 100;
+        }
         level.comp.draw(context, camera);
     }
    

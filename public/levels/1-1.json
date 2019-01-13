@@ -127,6 +127,7 @@
             "sprite": "chance",
             "type": "ground",
             "ranges": [
+                [4,5],
                 [23, 9],
                 [28, 9],
                 [30, 9],
