@@ -1,6 +1,5 @@
 import Level from './Level.js';
 import {createBackgroundLayer, createSpriteLayer} from "./layers.js";
-import {loadBackgroundSprites} from "./sprites.js";
 import SpriteSheet from './SpriteSheet.js';
 
 export function loadImage(url) {
@@ -25,7 +24,9 @@ function createTiles(level, backgrounds) {
         for(let x = xStart; x < xEnd; x++) {
             for (let y = yStart; y < yEnd; y++) {
                 level.tiles.set(x,y , {
-                    name: background.tile
+                    name: background.sprite,
+                    type: background.type
+
                 });
             }
         }
@@ -50,28 +51,28 @@ function createTiles(level, backgrounds) {
  
 }
 
-export function loadLevel(name) {
-    return Promise.all([
-        loadJSON(`/levels/${name}.json`),
-        loadSpriteSheet('overworld')
-    ])   
+export async function loadLevel(name) {
+  
+   
+    const levelSpec = await loadJSON(`/levels/${name}.json`);
+    const backgroundSprites = await loadSpriteSheet(levelSpec.spriteSheet);
+   
     
-    .then(([levelSpec,backgroundSprites]) => {
-        const level = new Level();
-        createTiles(level, levelSpec.backgrounds);
-        const  backgroundLayer = createBackgroundLayer(level, backgroundSprites);
-        level.comp.layers.push(backgroundLayer);
+   
+    const level = new Level();
+    createTiles(level, levelSpec.backgrounds);
+    const  backgroundLayer = createBackgroundLayer(level, backgroundSprites);
+    level.comp.layers.push(backgroundLayer);
 
       
-        const spriteLayer = createSpriteLayer(level.entities);
+    const spriteLayer = createSpriteLayer(level.entities);
         
-        level.comp.layers.push(spriteLayer);
+    level.comp.layers.push(spriteLayer);
        
         
-        return level;
+    return level;
 
-
-    });
+    
 }
 
 async function loadSpriteSheet(name) {   

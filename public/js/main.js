@@ -1,5 +1,5 @@
 import {loadLevel} from "./loaders.js";
-import {createCollisionLayer} from "./layers.js";
+import {createCollisionLayer, createCameraLayer} from "./layers.js";
 import {createPikachu} from "./entities.js";
 import {setupKeyboard} from "./input.js";
 import Timer from "./Timer.js";
@@ -22,7 +22,8 @@ Promise.all([
     pikachu.pos.set(20,56);
     
     level.entities.add(pikachu);
-    level.comp.layers.push(createCollisionLayer(level));
+    level.comp.layers.push(createCollisionLayer(level), createCameraLayer(camera));
+   
     setupMouseControl(canvas, pikachu, camera);
     const input = setupKeyboard(pikachu);    
    
