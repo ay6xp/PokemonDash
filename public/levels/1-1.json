@@ -356,5 +356,16 @@
                 }
             ]
         }
+    ],
+    "entities" : [
+        {
+            "name" : "bulbasaur",
+            "pos" : [220, 0]
+        },
+        {
+            "name" : "squirtle",
+            "pos" : [280, 0]
+        }
+
     ]
 }

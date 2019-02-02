@@ -4,7 +4,7 @@ export default class Go extends Trait {
     constructor() {
         super('go');
         this.dir = 0;
-        this.acceleration = 400;
+        this.acceleration = 800;
         this.deceleration = 300;
         this.friction = 1/5000;
 

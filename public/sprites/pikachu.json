@@ -96,7 +96,30 @@
                   
         }
           
-    ]
+    ],
+     "animations": [
+         {
+             "name" : "run",
+             "frameLen" : 10,
+             "frames" : [
+                 "run-1",
+                 "run-2",
+                 "run-3",
+                 "run-4"
+             ]
+         },
+         {
+             "name": "jump",
+             "frameLen": 10,
+             "frames": [
+                 "jump-1",
+                 "jump-2",
+                 "jump-3",
+                 "jump-4"
+             ]
+           
+         }
+     ]
   
 }
 

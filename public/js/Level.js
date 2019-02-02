@@ -1,6 +1,7 @@
 import Compositor from "./Compositor.js";
 import Matrix from "./math.js";
 import TileCollider from "./TileCollider.js";
+import EntityCollider from "./entities/EntityCollider.js";
 
 export default class Level {
     constructor() {
@@ -8,7 +9,7 @@ export default class Level {
         this.totalTime = 0;
         this.comp = new Compositor();
         this.entities = new Set();
-       
+        this.entityCollider = new EntityCollider(this.entities);
 
         this.tileColider = null;
     }
@@ -19,15 +20,15 @@ export default class Level {
 
     update(deltaTime) {
         this.entities.forEach(entity => {
-            entity.update(deltaTime);
+        entity.update(deltaTime, this);
+        });
+        //need to check for collision after speed has been adjusted above
+        this.entities.forEach(entity => { 
+            this.entityCollider.check(entity);
+        });
 
-             entity.pos.x += entity.vel.x * deltaTime;
-             this.tileColider.checkX(entity);
-            entity.pos.y += entity.vel.y * deltaTime;
-            this.tileColider.checkY(entity);
-
-            
-           entity.vel.y += this.gravity * deltaTime;
+        this.entities.forEach(entity => { 
+            entity.finalize();
         });
         this.totalTime += deltaTime;
     }
