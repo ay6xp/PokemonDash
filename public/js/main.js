@@ -13,14 +13,18 @@ import PlayerController from "./traits/PlayerController.js";
 import { loadFont } from "./loaders/font.js";
 import { createDashboardLayer } from "./layers/dashboard.js";
 
-function createPlayerEnvironment(playerEntity) {
-    const playerEnv = new Entity();
+
+function createPlayerEnvironment(playerEntity, level) {
+    const playerEnv = new Entity("playerEnv");
     const playerControl = new PlayerController();
     playerControl.checkpoint.set(64,64);
     playerControl.setPlayer(playerEntity);
     playerEnv.addTrait(playerControl);
+    playerControl.setLevel(level);
+    playerEntity.setEnvironment(playerEnv);
     return playerEnv;
 }
+
 
 async function main(canvas) {
     const context = canvas.getContext('2d');
@@ -30,31 +34,34 @@ async function main(canvas) {
 
     const camera = new Camera();
      window.camera = camera;
-     const pikachu = entityFactory.pikachu();
-   
+     const pikachu = await entityFactory.pikachu();  
+    
      
-     const playerEnv = createPlayerEnvironment(pikachu);
-     level.entities.add(playerEnv);
+     const playerEnv = createPlayerEnvironment(pikachu, level);
       
-     level.comp.layers.push(createDashboardLayer(font, playerEnv));
-    
+     level.entities.add(playerEnv);
+     
+     level.comp.layers.push(createDashboardLayer(font, playerEnv));   
      //level.comp.layers.push(createCollisionLayer(level), createCameraLayer(camera));
-    
+     level.comp.layers.push(createCollisionLayer(level));
    
-     const input = setupKeyboard(pikachu);    
+     const input = setupKeyboard(pikachu); 
+
     
  
      input.listenTo(window);
  
- 
+    
      const timer = new Timer(1/60);
  
      timer.update = function update(deltaTime) {     
          level.update(deltaTime);
          if (pikachu.pos.x > 100) {
              camera.pos.x = Math.max(0,pikachu.pos.x - 100);
+             
          }
          level.comp.draw(context, camera);
+         
      }
     
          timer.start();

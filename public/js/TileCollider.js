@@ -50,23 +50,30 @@ export default class TileCollider {
         } else {
             return;
         }
-
+        
         const matches = this.tiles.searchByRange(
             entity.bounds.left, entity.bounds.right,
             y, y);
-
+        
+      
         matches.forEach(match => {
+            
+            
+         
             if (match.tile.type !== 'ground') {
                 return;
             }
 
+            // if(match.tile.name === 'chance-block') {
+            //     console.log(match);
+            // }
             if (entity.vel.y > 0) {
                 if (entity.bounds.bottom > match.y1) {
                     entity.obstruct(Sides.BOTTOM, match);
                 }
             } else if (entity.vel.y < 0) {
                 if (entity.bounds.top < match.y2) {               
-
+                    
                     entity.obstruct(Sides.TOP, match);
                 }
             }

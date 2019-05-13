@@ -7,11 +7,15 @@ export function createDashboardLayer(font, playerEnv) {
 
     return function drawDashboard(context) {
         const {score, time} = playerEnv.playerController;
+       // const health = playerEnv.playerController.health.getHealth();
+        const health = playerEnv.playerController.player.health.getHealth();
 
         font.print('PIKACHU', context, 16, LINE1);
         font.print(score.toString().padStart(6, '0'), context, 16, LINE2);
 
-        font.print('@x' + coins.toString().padStart(2, '0'), context, 96, LINE2);
+       // font.print('@x' + coins.toString().padStart(2, '0'), context, 96, LINE2);
+       font.print('HEALTH', context, 88, LINE1);
+       font.print(health.toFixed().toString(), context, 96, LINE2);
 
         font.print('WORLD', context, 152, LINE1);
         font.print('1-1', context, 160, LINE2);
@@ -20,3 +24,4 @@ export function createDashboardLayer(font, playerEnv) {
         font.print(time.toFixed().toString().padStart(3, '0'), context, 216, LINE2);
     };
 }
+

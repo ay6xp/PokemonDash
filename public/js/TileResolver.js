@@ -50,6 +50,7 @@ export default class TileResolver {
             this.toIndexRange(y1,y2).forEach(indexY => {
                 const match = this.getByIndex(indexX, indexY);
                 if(match) {
+                   
                     matches.push(match);
                 }
             });

@@ -1,0 +1,45 @@
+{
+    "imageURL" : "./img/charizard.png",
+    "frames" : 
+    [
+        
+        {
+            "name" : "fly-1",
+            "rect": [125, 166, 124, 78]
+        },
+        {
+            "name" : "fly-2",
+            "rect": [253, 167, 126, 69]
+        },
+        {
+            "name": "fly-3",
+            "rect": [380, 167, 128, 72]
+        },
+        {
+            "name": "fly-4",
+            "rect": [509, 170, 138, 69]
+        },
+        {
+            "name" : "dead",
+            "rect" : [2, 81, 92, 87]
+        },
+        {
+            "name" : "idle",
+            "rect" : [564, 255, 116, 84]
+        }
+
+    ],
+    "animations": [
+        {
+            "name" : "fly",
+            "frameLen" : 0.15,
+            "frames" : [
+                "fly-1",
+                "fly-2",
+                "fly-3",
+                "fly-4"               
+            ]
+        }
+    ] 
+}
+

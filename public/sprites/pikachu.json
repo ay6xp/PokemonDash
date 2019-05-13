@@ -94,8 +94,49 @@
                 47                
          ]
                   
+        },
+        {
+            "name" : "skull-1",
+            "rect" : [9, 354, 53, 41]
+
+        },
+        {
+            "name" : "skull-2",
+            "rect" : [63, 356, 54, 40]
+        },
+        {
+            "name" : "skull-3",
+            "rect" : [119, 358, 54, 38]
+        },
+        {
+            "name": "skull-4",
+            "rect" : [175, 360, 61, 36]
+        }, 
+        {
+            "name" : "thunder-pose-1",
+            "rect" : [15, 283, 48, 49]
+        },
+        {
+            "name" : "thunder-pose-2",
+            "rect" : [66, 286, 43, 46]
+        },
+        {
+            "name" : "thunder-pose-3",
+            "rect" : [114, 274, 45, 62]
+        },
+        {
+            "name" : "damage-1",
+            "rect" : [4, 484, 61, 51]
+        },
+        {
+            "name" : "damage-2",
+            "rect" : [69, 486, 62, 49]
+        },
+        {
+            "name" : "dead",
+            "rect" : [132, 489, 68, 46]
         }
-          
+       
     ],
      "animations": [
          {
@@ -118,8 +159,45 @@
                  "jump-4"
              ]
            
-         }
+         },
+         {
+             "name" : "bash",
+             "frameLen" : 20,
+             "frames" : [
+                 "skull-1",
+                 "skull-2",
+                 "skull-3",
+                 "skull-4"
+             ]
+         },
+         {
+             "name" : "thunderbolt-pose",
+             "frameLen": 10,
+             "frames" : [
+                 "thunder-pose-1",
+                 "thunder-pose-2",
+                 "thunder-pose-3"        
+             ]
+         },
+         {
+             "name" : "damage",
+             "frameLen" : 0.15,
+             "frames" : [
+                 "damage-2",
+                 "damage-2",
+                 "damage-2",
+                 "damage-2"
+             ]
+         },
+         {
+             "name" : "dead",
+             "frameLen" : 0.15,
+             "frames" : [
+                 "damage-1",
+                 "damage-2",
+                 "dead"
+             ]
+         }         
      ]
   
 }
-

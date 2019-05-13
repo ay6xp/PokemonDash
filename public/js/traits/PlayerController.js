@@ -7,22 +7,40 @@ export default class PlayerController extends Trait {
         this.checkpoint = new Vec2(0,0);
         this.player = null;
         this.score = 0;
-        this.time = 300;       
+        this.time = 300; 
+        this.level = null;                  
     }
     setPlayer(entity) {
-        this.player = entity;
+        this.player = entity;       
         this.player.stomper.onStomp = () => {
-            this.score +=100;
+            this.score +=50;
         }
+        this.player.behavior.updateScore = () => {
+            this.score += 25;
+        }
+
     }
+    setLevel(level) {
+        this.level = level;
+    }
+
+    chanceBlockCollision(match) {
+        console.log("match ", match);
+        
+    }
+    
     update(entity, deltaTime, level) {
        if (!level.entities.has(this.player)) {
         this.player.killable.revive();
         this.player.pos.set(this.checkpoint.x, this.checkpoint.y);
-        level.entities.add(this.player);    
+        level.entities.add(this.player); 
+        this.player.health.setHealth(100);
+        
        } else {
            this.time -= deltaTime * 2;
        }
+
+      
     }
 
 

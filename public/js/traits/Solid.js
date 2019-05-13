@@ -7,7 +7,7 @@ export default class Solid extends Trait {
     
     }
 
- 
+    
     obstruct(entity, side, match) {
      if (!this.obstruct) {
          return;
@@ -15,9 +15,11 @@ export default class Solid extends Trait {
         if (side === Sides.BOTTOM) {
             entity.bounds.bottom = match.y1;
             entity.vel.y = 0;
+           
         } else if (side == Sides.TOP) {
             entity.bounds.top = match.y2;
-            entity.vel.y = 0;
+            entity.vel.y = 0;                 
+         
         }
         else if (side == Sides.LEFT) {
             entity.bounds.left = match.x2;

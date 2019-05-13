@@ -10,7 +10,7 @@ export default class Level {
         this.comp = new Compositor();
         this.entities = new Set();
         this.entityCollider = new EntityCollider(this.entities);
-
+        this.bgObjects = new Set();
         this.tileColider = null;
     }
 
@@ -20,7 +20,7 @@ export default class Level {
 
     update(deltaTime) {
         this.entities.forEach(entity => {
-        entity.update(deltaTime, this);
+            entity.update(deltaTime, this);
         });
         //need to check for collision after speed has been adjusted above
         this.entities.forEach(entity => { 
@@ -29,6 +29,12 @@ export default class Level {
 
         this.entities.forEach(entity => { 
             entity.finalize();
+        });
+
+        
+
+        this.bgObjects.forEach(obj => {
+            obj.update(deltaTime, this);
         });
         this.totalTime += deltaTime;
     }

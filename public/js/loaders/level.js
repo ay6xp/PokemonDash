@@ -2,7 +2,8 @@ import Level from '../Level.js';
 import Matrix from "../math.js";
 import {createSpriteLayer} from '../layers/sprites.js';
 import {createBackgroundLayer} from '../layers/background.js';
-import {loadJSON, loadSpriteSheet} from '../loaders.js';
+import {loadJSON, loadBackgroundSpriteSheet} from '../loaders.js';
+import { getBgEntityFactory } from '../entities.js';
 
 
 function* expandSpan(xStart, xLen, yStart, yLen) {
@@ -39,6 +40,7 @@ function* expandRanges(ranges) {
 function* expandTiles(tiles, patterns) {
 
     function* walkTiles(tiles, offsetX, offsetY) {
+
         for (const tile of tiles) {
             for (const {x, y} of expandRanges(tile.ranges)) {             
                 const derivedX = x + offsetX;
@@ -57,28 +59,46 @@ function* expandTiles(tiles, patterns) {
         }
     }
     //generator yield
+  
     yield* walkTiles(tiles, 0, 0);
 }
 
 function setupCollision(levelSpec, level) {
-    const mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) => {
+    let mergedTiles = levelSpec.layers.reduce((mergedTiles, layerSpec) => {
         return mergedTiles.concat(layerSpec.tiles);
-    }, []);
+    }, []);   
+    mergedTiles = mergedTiles.concat(levelSpec.bgObjects);
+    
     const collisionGrid = createCollisionGrid(mergedTiles, levelSpec.patterns);
-    level.setCollisionGrid(collisionGrid);
+   level.setCollisionGrid(collisionGrid);
+   
+    
 }
 
 function setupBackground(levelSpec, level, backgroundSprites) {
-    levelSpec.layers.forEach(layer => {
+   levelSpec.layers.forEach(layer => {
         const backgroundGrid = createBackgroundGrid(layer.tiles, levelSpec.patterns);
-        const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);
+        const backgroundLayer = createBackgroundLayer(level, backgroundGrid, backgroundSprites);        
         level.comp.layers.push(backgroundLayer);
     });
 }
 
-function setupEntities(levelSpec, level, entityFactory) {
+async function setupBGObjects(levelSpec, level, sheet) {  
 
-    levelSpec.entities.forEach(({name, pos: [x,y]}) => {
+    for (const {tile, x ,y} of expandTiles(levelSpec.bgObjects, null)) {
+        
+        const createBgEntity = await getBgEntityFactory(tile.name, sheet(true, tile.name));  
+        const entity = createBgEntity();
+        entity.pos.set(x * entity.size.x,y * entity.size.y); 
+        entity.setLevel(level);
+        level.entities.add(entity);  
+    }
+
+}
+
+ function setupEntities(levelSpec, level, entityFactory) {
+
+    levelSpec.entities.forEach(({name, pos: [x,y]}) => {      
        const createEntity = entityFactory[name];
        const entity = createEntity();
        entity.pos.set(x,y);
@@ -91,11 +111,13 @@ export function createLevelLoader(entityFactory) {
     return async function loadLevel(name) { 
    
         const levelSpec = await loadJSON(`/levels/${name}.json`);
-        const backgroundSprites = await loadSpriteSheet(levelSpec.spriteSheet);
+        const sheet = await loadBackgroundSpriteSheet(levelSpec.spriteSheet);
+        const backgroundSprites = sheet();        
         const level = new Level();
     
        setupCollision(levelSpec, level);
        setupBackground(levelSpec, level, backgroundSprites);
+       await setupBGObjects(levelSpec, level, sheet);
        setupEntities(levelSpec, level, entityFactory);
        return level;        
     }
@@ -104,9 +126,14 @@ export function createLevelLoader(entityFactory) {
 
 function createCollisionGrid(tiles, patterns) {
     const grid = new Matrix();
+    
     for (const {tile, x ,y} of expandTiles(tiles, patterns)) {
+        // problem with collision grid not including chance might be here (expand tiles)
+       
         grid.set(x, y, {
+            name: tile.name,
             type: tile.type
+
         });
     }
     return grid;
@@ -114,9 +141,12 @@ function createCollisionGrid(tiles, patterns) {
 
 function createBackgroundGrid(tiles, patterns) {
     const grid = new Matrix();
-    for (const {tile, x ,y} of expandTiles(tiles, patterns)) {
+
+    for (const {tile, x ,y} of expandTiles(tiles, patterns)) {   
+        
+       
         grid.set(x, y, {
-            name: tile.name
+            name: tile.name            
         });
     }
     return grid;

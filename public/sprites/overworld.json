@@ -19,25 +19,8 @@
         {
             "name": "bricks",
             "index": [1, 0]
-        },
-        {
-            "name": "chance",
-            "index": [24, 0]
-        },
-
-        {
-            "name": "chance-1",
-            "index": [24, 0]
-        },
-        {
-            "name": "chance-2",
-            "index": [25, 0]
-        },
-        {
-            "name": "chance-3",
-            "index": [26, 0]
-        },
-
+        },    
+ 
         {
             "name": "pipe-insert-vert-left",
             "index": [0, 8]
@@ -79,18 +62,42 @@
             "index": [2, 21]
         }
     ],
-
-    "animations": [
+    "bgObjects" : [
         {
-            "name": "chance",
-            "frameLen": 0.12,
-            "frames": [
-                "chance-1",
-                "chance-1",
-                "chance-2",
-                "chance-3",
-                "chance-2"
+            "name" : "chance-block",
+            "frames" : [
+                {
+                    "name": "chance-1",
+                    "index": [24, 0]
+                },
+                {
+                    "name": "chance-2",
+                    "index": [25, 0]
+                },
+                {
+                    "name": "chance-3",
+                    "index": [26, 0]
+                },
+                {
+                    "name" : "chance-4",
+                    "index" : [27, 0]
+                }
+            ],
+            "animations": [
+                {
+                    "name": "chance",
+                    "frameLen": 0.12,
+                    "frames": [
+                        "chance-1",
+                        "chance-1",
+                        "chance-2",
+                        "chance-3",
+                        "chance-2"
+                    ]
+                }
             ]
         }
+       
     ]
+    
 }

@@ -5,15 +5,32 @@ function createEntityLayer(entities) {
     context.strokeStyle = 'red';
         entities.forEach(entity => {
         context.beginPath();
-        context.rect(entity.bounds.left - camera.pos.x, entity.bounds.top - camera.pos.y, entity.size.x,entity.size.y);
+        context.rect(entity.bounds.left - camera.pos.x, entity.bounds.top - camera.pos.y, entity.size.x, entity.size.y);
         context.stroke();
+
+        if(entity.activeMoves.length > 0) {
+            context.beginPath();
+            context.rect(entity.activeMoves[0].bounds.left - camera.pos.x, entity.activeMoves[0].bounds.top - camera.pos.y,
+                 entity.activeMoves[0].size.x, entity.activeMoves[0].size.y);
+            context.stroke();
+        }
     });
    }
 }
-
+function createAttackAILayer(entities) {
+    return function drawAILayer(context, camera) {
+        context.strokeStyle = 'green';
+        entities.forEach(entity => {
+            context.beginPath();
+            context.rect(entity.AIBounds.left - camera.pos.x, entity.AIBounds.top - camera.pos.y, 
+                entity.size.x + entity.dimension.x, entity.size.y + entity.dimension.y);
+            context.stroke();
+        });
+    }
+}
 function createTileCandidateLayer(tileCollider){
     const resolvedTiles = [];
-    const tileResolver = tileColider.tiles;
+    const tileResolver = tileCollider.tiles;
     const tileSize = tileResolver.tileSize;
     
     const getByIndexOriginal = tileResolver.getByIndex;
@@ -40,9 +57,14 @@ export function createCollisionLayer(level) {
   
     const drawBoundingBoxes = createEntityLayer(level.entities);
     
+
+    const drawAIBoxes = createAttackAILayer(level.entities);
+    
     return function drawCollision(context, camera) {
         drawTileCandidates(context, camera);     
         drawBoundingBoxes(context, camera);
+      
+        drawAIBoxes(context, camera);
     }
    
     
