@@ -18,11 +18,10 @@ export async function loadEntities() {
     return entityFactories;
 }
 
- export async function getBgEntityFactory(name, sprite) {
-   
-    if(name === 'chance-block') {
-        return await loadChanceblock(sprite);
-    }
+ export async function getBgEntityFactory(sheet) {
+    const bgFactory = {};
+    bgFactory['chance-block'] = await loadChanceblock(sheet(true, 'chance-block'));
+    return bgFactory;
 
 }
 

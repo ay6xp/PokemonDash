@@ -115,21 +115,13 @@ export function createLevelLoader(entityFactory) {
         const backgroundSprites = sheet();        
         const level = new Level();
         
-       const bgFactory = await createBGFactory(sheet);
+       const bgFactory = await getBgEntityFactory(sheet);
        setupCollision(levelSpec, level);
        setupBackground(levelSpec, level, backgroundSprites);
        await setupBGObjects(levelSpec, level, bgFactory);
        setupEntities(levelSpec, level, entityFactory);
        return level;        
     }
-}
-
-export async function createBGFactory(sheet) {
-    const factory = {};
-   
-    factory['chance-block'] = await getBgEntityFactory('chance-block', sheet(true, 'chance-block'));
-   
-    return factory;
 }
 
 function createCollisionGrid(tiles, patterns) {
