@@ -34,10 +34,10 @@ class Behavior extends Trait {
             // light ball -> will evolve pikachu
         }
         else {
-            // const potion = us.options.potion();
-            // potion.pos.set(us.pos.x, us.pos.y - potion.size.y);
+             const potion = us.options.potion();
+             potion.pos.set(us.pos.x, us.pos.y - potion.size.y);
 
-            // us.level.entities.add(potion);
+             us.level.entities.add(potion);
         }
     }
 
@@ -88,8 +88,8 @@ export function loadChanceblock(chanceSprite) {
         chanceSprite.draw(routeFrame(this), context, 0, 0, 0);
     }    
 
-   const entries = await getChanceBlockEntities();
-
+   const entries = await getChanceBlockEntities();   
+   
     return function createChanceblock() {
         const chance = new Entity('chance-block');
         chance.state = AttackModes.OBJECT;

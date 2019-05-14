@@ -93,14 +93,14 @@ export async function loadSpriteSheet(name) {
 
 export async function loadObject() {
     const sheetSpec = await loadJSON('/sprites/objects.json');
-    items = {};
+    const items = {};
     if(sheetSpec.objects) {
         sheetSpec.objects.forEach(object => {
             items[object.object_name] = object;
         });
-    }
+    }   
     
-    return function loadSheet(sheetName) {
+    return async function loadSheet(sheetName) {
         const image = await loadImage(`./img/${sheetName}.png`);    
         const sprites = new SpriteSheet(image, 16, 16);            
         const currentItem = items[sheetName];
@@ -111,7 +111,7 @@ export async function loadObject() {
 
         if (currentItem.animations) {
             const animation = createAnim(currentItem.animations.frames, currentItem.animations.frameLen);
-            sprites.defineAnim(object.animations.name, animation);
+            sprites.defineAnim(currentItem.animations.name, animation);
         }         
                 
     

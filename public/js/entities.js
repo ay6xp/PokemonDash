@@ -19,7 +19,7 @@ export async function loadEntities() {
 }
 
  export async function getBgEntityFactory(name, sprite) {
-
+   
     if(name === 'chance-block') {
         return await loadChanceblock(sprite);
     }
@@ -29,7 +29,8 @@ export async function loadEntities() {
 export async function getChanceBlockEntities() {
   const chanceFactory = {}; 
   const [pokeball, potion] = await loadObjects();
-  chanceFactory['pokeball'], chanceFactory['potion'] = pokeball, potion;
+  chanceFactory['pokeball'] = pokeball;
+  chanceFactory['potion'] = potion;
   return chanceFactory;
 
 }

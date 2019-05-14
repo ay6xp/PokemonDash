@@ -83,11 +83,11 @@ function setupBackground(levelSpec, level, backgroundSprites) {
     });
 }
 
-async function setupBGObjects(levelSpec, level, sheet) {  
+async function setupBGObjects(levelSpec, level, bgFactory) {  
 
     for (const {tile, x ,y} of expandTiles(levelSpec.bgObjects, null)) {
         
-        const createBgEntity = await getBgEntityFactory(tile.name, sheet(true, tile.name));  
+        const createBgEntity = bgFactory[tile.name];
         const entity = createBgEntity();
         entity.pos.set(x * entity.size.x,y * entity.size.y); 
         entity.setLevel(level);
@@ -114,15 +114,23 @@ export function createLevelLoader(entityFactory) {
         const sheet = await loadBackgroundSpriteSheet(levelSpec.spriteSheet);
         const backgroundSprites = sheet();        
         const level = new Level();
-    
+        
+       const bgFactory = await createBGFactory(sheet);
        setupCollision(levelSpec, level);
        setupBackground(levelSpec, level, backgroundSprites);
-       await setupBGObjects(levelSpec, level, sheet);
+       await setupBGObjects(levelSpec, level, bgFactory);
        setupEntities(levelSpec, level, entityFactory);
        return level;        
     }
 }
 
+export async function createBGFactory(sheet) {
+    const factory = {};
+   
+    factory['chance-block'] = await getBgEntityFactory('chance-block', sheet(true, 'chance-block'));
+   
+    return factory;
+}
 
 function createCollisionGrid(tiles, patterns) {
     const grid = new Matrix();
@@ -142,9 +150,8 @@ function createCollisionGrid(tiles, patterns) {
 function createBackgroundGrid(tiles, patterns) {
     const grid = new Matrix();
 
-    for (const {tile, x ,y} of expandTiles(tiles, patterns)) {   
-        
-       
+    for (const {tile, x ,y} of expandTiles(tiles, patterns)) {  
+    
         grid.set(x, y, {
             name: tile.name            
         });

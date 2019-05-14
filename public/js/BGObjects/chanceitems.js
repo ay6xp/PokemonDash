@@ -67,9 +67,9 @@ export async function loadPotion(sheet) {
 function createPotionFactory(sprite) {
 
     function routeFrame(potion) {
-        if(potion.behavior.touched) {
-            return 'potion-open';
-        }
+        // if(potion.behavior.touched) {
+        //     return 'potion-open';
+        // }
         return "potion-1";
     }
     function drawPotion(context) {
