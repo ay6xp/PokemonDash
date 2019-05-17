@@ -41,9 +41,10 @@ export function setupKeyboard(pikachu) {
     });
 
     input.addMapping('KeyT', keyState => {    
-        if(keyState & !pikachu.killable.dead) {
+        if(keyState & !pikachu.killable.dead && pikachu.behavior.thunderboltsLeft > 0) {
             pikachu.activeMoves.push(pikachu.moves[0]);
             pikachu.activeMoves[0].start();
+            pikachu.behavior.thunderboltsLeft--;
         }    
     });
 

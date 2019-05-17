@@ -22,12 +22,7 @@ export default class PlayerController extends Trait {
     }
     setLevel(level) {
         this.level = level;
-    }
-
-    chanceBlockCollision(match) {
-        console.log("match ", match);
-        
-    }
+    }  
     
     update(entity, deltaTime, level) {
        if (!level.entities.has(this.player)) {

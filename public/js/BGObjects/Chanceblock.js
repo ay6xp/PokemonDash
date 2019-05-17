@@ -12,11 +12,7 @@ class Behavior extends Trait {
    tapped(us) {
         if(!this.set) {
             this.set = true;
-            this.random_item(us);
-            //what items to include in chance block?
-            // "pokeball" to increase score
-            // light ball to evolve pikachu
-            // potion/some object to increase halth
+            this.random_item(us);     
         }
         
     }

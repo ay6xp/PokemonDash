@@ -17,7 +17,7 @@ export async function loadThunder() {
     
     return function thunderEntity() {
         const thunderShock = new Thunderbolt('thunderbolt');
-        thunderShock.size.set(30,256);
+        thunderShock.size.set(30,128);
         thunderShock.pos.set(100,100);
         thunderShock.draw = drawThunder;
 

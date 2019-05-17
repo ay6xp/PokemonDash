@@ -22,6 +22,7 @@ class Behavior extends Trait {
     constructor() {
         super('behavior');  
         this.direction = 0;
+        this.thunderboltsLeft = 0;
             
     }
     collides(us, candidate) {       
@@ -32,7 +33,8 @@ class Behavior extends Trait {
             us.health.increaseHealth(10);
         }
         if (candidate.name === "thunderstone") {
-            console.log("PIKACHU EVOLVING");
+           // console.log("PIKACHU EVOLVING");
+           this.thunderboltsLeft = 3;
         }
     }
 
@@ -167,7 +169,7 @@ function createPikachuFactory(pikachuSprite) {
         pikachu.draw = drawPikachu;
 
         
-        //pikachu.chanceBlockCollision = chance;
+        // thunderstone will give pikachu ability to use 3 thunder attacks
 
         return pikachu;
 

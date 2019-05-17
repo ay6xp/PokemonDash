@@ -131,14 +131,16 @@ async function createBulbasaurFactory(sprite) {
 
     function inView(candidate) {
        
-        if(this.AIBounds.inSight(candidate.bounds) && candidate.name === "pikachu")
+        if(this.AIBounds.inSight(candidate.bounds) && candidate.name === "pikachu" && !this.killable.dead)
         {    
             
             if(this.activeMoves.length == 0 && !candidate.killable.dead 
                 && ((candidate.pos.x < this.pos.x && !this.behavior.direction) || 
                 (candidate.pos.x > this.pos.x && this.behavior.direction) )            
-               
-                ) {
+                && (candidate.pos.y + Math.abs(candidate.size.y - this.size.y) >= this.pos.y)
+                ) 
+                
+                {
                 
                
                 this.behavior.following = true;
