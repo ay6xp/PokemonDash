@@ -31,11 +31,13 @@ class Behavior extends Trait {
             us.level.entities.add(pokeball);
         }
         else if (random === 2) {
-            // light ball -> will evolve pikachu
+            const tstone = us.options.thunderstone();
+            tstone.pos.set(us.pos.x + 1, us.pos.y - tstone.size.y - 2);
+            us.level.entities.add(tstone);
         }
         else {
              const potion = us.options.potion();
-             potion.pos.set(us.pos.x, us.pos.y - potion.size.y);
+             potion.pos.set(us.pos.x + 4, us.pos.y - potion.size.y -2);
 
              us.level.entities.add(potion);
         }

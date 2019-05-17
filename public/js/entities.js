@@ -27,9 +27,10 @@ export async function loadEntities() {
 
 export async function getChanceBlockEntities() {
   const chanceFactory = {}; 
-  const [pokeball, potion] = await loadObjects();
+  const [pokeball, potion, thunderstone] = await loadObjects();
   chanceFactory['pokeball'] = pokeball;
   chanceFactory['potion'] = potion;
+  chanceFactory['thunderstone'] = thunderstone;
   return chanceFactory;
 
 }

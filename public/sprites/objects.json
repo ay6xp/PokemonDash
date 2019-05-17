@@ -31,7 +31,17 @@
             [
                 {
                     "name" : "potion-1",
-                    "rect" : [6, 1, 22, 32]
+                    "rect" : [4, 34, 8, 12]
+                }
+            ]
+        },
+        {
+            "object_name" : "thunderstone",
+            "frames" : 
+            [
+                {
+                    "name" : "thunderstone-1",
+                    "rect" : [1, 1, 16, 15]
                 }
             ]
         }

@@ -39,7 +39,7 @@ class Behavior extends Trait {
             }
            
          } 
-         if (us.state == AttackModes.ATTACKING)
+         if (us.state == AttackModes.ATTACKING && them.name === "pikachu")
          {
              them.killable.kill();
          }   

@@ -337,6 +337,30 @@
         {
             "name" : "bulbasaur",
             "pos" : [220, 0]
+        }, 
+        {
+            "name" : "bulbasaur",
+            "pos" : [220, 0]
+        },
+        {
+            "name" : "squirtle",
+            "pos" : [280, 0]
+        },  
+        {
+            "name" : "charizard",
+            "pos" : [330, 0]
+        },    
+        {
+            "name" : "squirtle",
+            "pos" : [600, 0]
+        },
+        {
+            "name" : "bulbasaur",
+            "pos" : [950, 0]
+        },
+        {
+            "name" : "squirtle",
+            "pos" : [1300, 0]
         }
 
 

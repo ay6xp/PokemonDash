@@ -87,9 +87,37 @@ function createPotionFactory(sprite) {
     }
 }
 
+export async function loadThunderstone(sheet) {
+    return sheet('thunderstone').then(createThunderstoneFactory);
+
+
+    function createThunderstoneFactory(sprite) {
+        function routeFrame(stone) {
+            return 'thunderstone-1';
+        }
+
+    function drawThunderstone(context) {
+         sprite.draw(routeFrame(this), context, 0, 0 ,0);
+    }
+
+    return function createThunderstone() {
+        const tstone = new Entity('thunderstone');
+        tstone.state = AttackModes.OBJECT;
+
+        tstone.draw = drawThunderstone;
+        tstone.addTrait(new Behavior());
+
+        tstone.size.set(12,12);
+        return tstone;
+
+    }
+    
+    }
+}
+
 
 export async function loadObjects() {
     return loadObject().then((loadSheet) => {
-        return Promise.all([loadPokeball(loadSheet), loadPotion(loadSheet)])
+        return Promise.all([loadPokeball(loadSheet), loadPotion(loadSheet), loadThunderstone(loadSheet)])
     });
 }

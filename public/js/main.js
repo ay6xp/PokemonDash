@@ -43,7 +43,7 @@ async function main(canvas) {
      
      level.comp.layers.push(createDashboardLayer(font, playerEnv));   
      //level.comp.layers.push(createCollisionLayer(level), createCameraLayer(camera));
-     level.comp.layers.push(createCollisionLayer(level));
+     //level.comp.layers.push(createCollisionLayer(level));
    
      const input = setupKeyboard(pikachu); 
 

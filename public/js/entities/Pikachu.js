@@ -28,6 +28,12 @@ class Behavior extends Trait {
         if (candidate.name === 'pokeball') {
            this.updateScore();
         }
+        if (candidate.name === 'potion') {
+            us.health.increaseHealth(10);
+        }
+        if (candidate.name === "thunderstone") {
+            console.log("PIKACHU EVOLVING");
+        }
     }
 
     updateScore() {
@@ -60,6 +66,9 @@ class Health extends Trait {
     }
     setHealth(health) {
         this.health = health;
+    }
+    increaseHealth(amount) {
+        this.health += amount;
     }
     damage(hitFactor, direction) {
         this.takingDamage = true;

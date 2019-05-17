@@ -18,7 +18,7 @@ export default class PlayerController extends Trait {
         this.player.behavior.updateScore = () => {
             this.score += 25;
         }
-
+     
     }
     setLevel(level) {
         this.level = level;
