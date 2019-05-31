@@ -28,18 +28,21 @@ class Behavior extends Trait {
         if(us.killable.dead) {
             return;
         }
-        if (them.stomper) {
-           
+        if (them.stomper) {       
             if (them.vel.y > us.vel.y) {
               
                 this.handleStomp(us, them);
-            } else {
-               
+            }
+            else if(them.pos.y + Math.abs(them.size.y - us.size.y) >= us.pos.y) {
                 this.handleNudge(us, them);
             }
            
-         } 
-         if (us.state == AttackModes.ATTACKING && them.name === "pikachu")
+         }  
+
+         if (us.state === AttackModes.HIDING || us.state === AttackModes.PANIC) {
+            
+         }
+         if (us.state === AttackModes.ATTACKING && them.name === "pikachu")
          {
              them.killable.kill();
          }   
@@ -70,22 +73,26 @@ class Behavior extends Trait {
         }
     }
 
-    handleStomp(us, them) {        
+    handleStomp(us, them) {      
+   
         if(us.state === AttackModes.DEFAULT) {
             this.hide(us);
+           
         } else if (us.state === AttackModes.HIDING) {            
             us.killable.kill();
-            us.vel.set(100,-200);
+            us.vel.set(100,-200);         
             us.solid.obstructs = false;
         } else if (us.state === AttackModes.PANIC) {
             this.hide(us);
         }
     }
-     handleNudge(us, them) {
+     handleNudge(us, them) {        
+      
         if (us.state === AttackModes.DEFAULT && them.state !== AttackModes.ATTACKING) {
             them.killable.kill();
-        }
-        if (us.state === AttackModes.HIDING){
+        }       
+        if (us.state === AttackModes.HIDING){  //this is what is causing problem with squirlle
+             // program calling handle nudge right after handle stomp so go from hide to panic state very fast
             this.panic(us, them);
          } else if (us.state === AttackModes.PANIC) {
              const travelDir = Math.sign(us.vel.x);
@@ -119,6 +126,7 @@ class Behavior extends Trait {
         us.state = AttackModes.PANIC;
     }
     update(us, deltaTime) {
+   
         if (us.state === AttackModes.HIDING || us.state === AttackModes.PANIC) {
         
             this.hideTime += deltaTime;             
@@ -149,7 +157,7 @@ function inView(candidate) {
         if(this.AIBounds.inSight(candidate.bounds) && !this.behavior.following
          && (
             (candidate.pos.x < this.pos.x && !this.behavior.direction) || 
-            (candidate.pos.x > this.pos.x && this.behavior.direction)             
+            (candidate.pos.x > this.pos.x && this.behavior.direction) 
         )
         // make sure squirtle only attacks when on same plane asplayer
          && (candidate.pos.y + Math.abs(candidate.size.y - this.size.y) >= this.pos.y)           

@@ -1,7 +1,10 @@
 import KeyboardState from "./KeyboardState.js";
-export function setupKeyboard(pikachu) {
+import { gamestate } from "./main.js";
+
+export function setupKeyboard(pikachu, game_state) {
    
     const input = new KeyboardState();
+    
     input.addMapping('Space', keyState => {
     if(!pikachu.killable.dead) {
         if (keyState) {
@@ -18,9 +21,8 @@ export function setupKeyboard(pikachu) {
         pikachu.facing = 1;
         } else {
             pikachu.go.dir = 0;
-        }
-        
-    });
+        }     
+    });    
 
     input.addMapping('ArrowLeft', keyState => {
      if(!pikachu.killable.dead) {
@@ -32,12 +34,22 @@ export function setupKeyboard(pikachu) {
        
     });
 
-    input.addMapping('KeyB', keyState => {
-    
+    input.addMapping('KeyB', keyState => {        
         if (keyState & !pikachu.killable.dead) {
             pikachu.bash.start();        
         } 
            
+    });
+
+    input.addMapping('KeyP', keyState => {        
+        if(game_state.state === gamestate.PLAYING && keyState){
+            game_state.state = gamestate.PAUSED;
+        } 
+        else if 
+        (game_state.state === gamestate.PAUSED && keyState) {
+            game_state.state = gamestate.PLAYING;
+        }
+        
     });
 
     input.addMapping('KeyT', keyState => {    

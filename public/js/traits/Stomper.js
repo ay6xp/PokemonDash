@@ -1,5 +1,5 @@
 
-import {Trait, Sides} from "../Entity.js";
+import {Trait, Sides, AttackModes} from "../Entity.js";
 
 export default class Stomper extends Trait {
     constructor() {
@@ -13,16 +13,15 @@ export default class Stomper extends Trait {
     }
     bounce(us, them) {
         us.bounds.bottom = them.bounds.top;
-        us.vel.y = -this.bounceSpeed;
-    
+        us.vel.y = -this.bounceSpeed;      
     }
     collides(us, them) {
         if (!them.killable || them.killable.dead) {
             return;
         } 
         
-        if (us.vel.y > them.vel.y) {
-            this.bounce(us, them);
+        if (us.vel.y > them.vel.y && them.state != AttackModes.FLYING) {
+            this.bounce(us, them); 
             this.onStomp(us, them);
         }
     }

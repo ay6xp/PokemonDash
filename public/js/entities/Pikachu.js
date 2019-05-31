@@ -23,6 +23,7 @@ class Behavior extends Trait {
         super('behavior');  
         this.direction = 0;
         this.thunderboltsLeft = 0;
+        
             
     }
     collides(us, candidate) {       

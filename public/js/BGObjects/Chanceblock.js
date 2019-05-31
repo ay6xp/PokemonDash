@@ -1,24 +1,25 @@
 import Entity, { AttackModes, Trait } from "../Entity.js";
 import BGCollision from "../traits/BGCollision.js";
 import { getChanceBlockEntities } from "../entities.js";
-
+import {sound} from "../Sound.js";
 class Behavior extends Trait {
 
     constructor() {
         super('behavior');
-        this.set = false;
+        this.set = false;      
     }
 
    tapped(us) {
         if(!this.set) {
             this.set = true;
+            us.sound();
             this.random_item(us);     
         }
         
     }
     random_item(us) {
         let random = Math.floor(Math.random() * 3) + 1;
-        console.log(random);
+      
         if (random === 1) {
             const pokeball = us.options.pokeball();            
           
@@ -87,7 +88,7 @@ export function loadChanceblock(chanceSprite) {
     }    
 
    const entries = await getChanceBlockEntities();   
-   
+   const chanceSound = new sound("/sounds/smb_coin.wav");
     return function createChanceblock() {
         const chance = new Entity('chance-block');
         chance.state = AttackModes.OBJECT;
@@ -95,6 +96,10 @@ export function loadChanceblock(chanceSprite) {
         chance.addTrait(new Behavior());
         chance.draw = drawChanceblock;
         chance.size.set(16, 16);
+       
+        chance.sound = function() {
+            chanceSound.play();
+        }
 
         chance.options = entries;
         return chance;

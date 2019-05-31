@@ -59,7 +59,7 @@ export default class Basher extends Trait {
             //  candidate can not be hurt by bash
         } else if (candidate.state === AttackModes.ATTACKING) {
             // depends 
-        } else if (candidate.state === AttackModes.DEFAULT) {            
+        } else if (candidate.state === AttackModes.DEFAULT && entity.state === AttackModes.ATTACKING) {            
             candidate.killable.kill();
         }
 

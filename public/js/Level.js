@@ -2,6 +2,7 @@ import Compositor from "./Compositor.js";
 import Matrix from "./math.js";
 import TileCollider from "./TileCollider.js";
 import EntityCollider from "./entities/EntityCollider.js";
+import {sound} from "./Sound.js";
 
 export default class Level {
     constructor() {
@@ -12,10 +13,20 @@ export default class Level {
         this.entityCollider = new EntityCollider(this.entities);
         this.bgObjects = new Set();
         this.tileColider = null;
+        this.sound = null;
     }
 
     setCollisionGrid(matrix) {
         this.tileColider = new TileCollider(matrix);
+    }  
+
+    playBackgroundMusic(src) {
+        if(this.sound) {
+            this.sound.stop();
+        }         
+       this.sound = new sound(src);     
+       this.sound.play();      
+       
     }
 
     update(deltaTime) {

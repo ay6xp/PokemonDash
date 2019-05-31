@@ -1,4 +1,4 @@
-import Entity, {Sides, Trait} from '../Entity.js';
+import Entity, {Sides, Trait, AttackModes} from '../Entity.js';
 import {loadSpriteSheet} from '../loaders.js';
 import PendulumRun from '../traits/pendulum.js';
 import Killable from '../traits/Killable.js';
@@ -15,9 +15,30 @@ class Behavior extends Trait {
         super('behavior');
         this.following = false;
         this.direction = 0;
+        this.deltaTime = 0;
         
     }
 
+    collides(us, them) {
+        if(them.health) {
+       
+            //them.health.damage(50, this.direction);
+         //   them.pos.x += them.vel.x * this.deltaTime;
+         //   them.pos.y += them.vel.y * this.deltaTime;
+            
+            // if(them.pos.x < us.pos.x) {
+               
+            //     them.pos.x
+
+            //  }
+            // if (them.pos.x > us.pos.x) {
+            //    // them.pos.set(us.pos.x + 5, us.pos.y -5);
+            // }
+           // them.pos.set(them.pos.x - 5, them.pos.y - 5);            
+        } else{
+            this.enemyDead = 1;
+        }
+    }
     direction_move(us, them) {
         us.vel.x = 0;
         if(them.pos.x > us.pos.x)  {    
@@ -27,7 +48,7 @@ class Behavior extends Trait {
         }
     }
     update(us, deltaTime) {
-    
+        this.deltaTime = deltaTime;
     }
 
 
@@ -77,6 +98,7 @@ async function createCharizardFactory(sprite) {
         charizard.addTrait(new PendulumRun());
         charizard.addTrait(new Behavior());
         charizard.addTrait(new Killable());
+        charizard.state = AttackModes.FLYING;
       
        
         charizard.addMove(moves.flameblast());

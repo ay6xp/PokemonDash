@@ -21,6 +21,7 @@ export default class Jump extends Trait {
         this.requestTime = 0;
     }
     obstruct(entity, side) {
+        
         if (side === Sides.BOTTOM) {         
                 
                 this.ready = true;           

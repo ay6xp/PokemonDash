@@ -27,27 +27,23 @@ class Behavior extends Trait {
         if(us.killable.dead) {
             return;
         }
+        if (them.stomper) {
+            if (them.vel.y > us.vel.y) {
+                us.killable.kill();
+                us.pendulumRun.speed = 0;
+        }
+     }
 
-        // if (them.bash) {          
-        //     if (them.bash.ready) {
-        //         us.killable.kill();
-        //         us.pendulumRun.speed = 0;
-        //     }             
-        //     else if (them.stomper) {
-        //         if (them.vel.y > us.vel.y) {
-        //             us.killable.kill();
-        //             us.pendulumRun.speed = 0;
-        //         } else  {                
-        //             them.killable.kill();              
-                    
-        //         }           
-        //     }
+        if (them.bash) {          
+            if (them.bash.ready) {
+                us.killable.kill();
+                us.pendulumRun.speed = 0;
+            }             
+              
+            }
 
-        // }
-   
-      
-    }
-
+    }       
+  
     defaultState(us) {
         
         this.following = false;
