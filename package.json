@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "serve ./public",
+    "start": "harp server --port $PORT",
+    "play": "serve ./public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "harp": "^0.30.0",
     "serve": "^10.1.2"
   }
 }
