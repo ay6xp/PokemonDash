@@ -1,7 +1,7 @@
 
 
 
-export function createSpriteLayer(entities, width = 748, height = 468) {
+export function createSpriteLayer(entities, width = 256, height = 240) {
     const spriteBuffer = document.createElement('canvas');
     spriteBuffer.width = width;
     spriteBuffer.height = height;

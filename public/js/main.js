@@ -28,8 +28,7 @@ function createPlayerEnvironment(playerEntity, level) {
     playerControl.checkpoint.set(64,64);
     playerControl.setPlayer(playerEntity);
     playerEnv.addTrait(playerControl);
-    playerControl.setLevel(level);
-    playerEntity.setEnvironment(playerEnv);
+    playerControl.setLevel(level);    
     return playerEnv;
 }
 
@@ -61,7 +60,7 @@ async function loadGame(canvas, state) {
      //level.comp.layers.push(createCollisionLayer(level), createCameraLayer(camera));
      //level.comp.layers.push(createCollisionLayer(level));
     
-     level.playBackgroundMusic("/sounds/forest.mp3");
+     level.playBackgroundMusic("/sounds/01-main-theme-overworld.mp3");
       
      const timer = new Timer(1/60);
  
