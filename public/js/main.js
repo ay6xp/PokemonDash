@@ -159,7 +159,8 @@ async function loadGame(canvas, state) {
         canvas.width = 256;
         canvas.height = 240; 
         game_state.state = gamestate.PLAYING;
-        document.removeEventListener("keyup", clickedScreen);
+        document.removeEventListener("keyup", pressedKey);
+        document.removeEventListener("click", clickedScreen);
         loadGame(canvas,state);
         if(!sound.paused) sound.pause();       
        }
