@@ -74,7 +74,7 @@ async function loadGame(canvas, state) {
              camera.pos.x = Math.max(0,pikachu.pos.x - 100);
              
          }
-         if(pikachu.pos.x >= 3270) {
+         if(pikachu.pos.x === 3270) {
              alert("you win! game isn't done yet, but hope you had fun!");
          }
          level.comp.draw(context, camera);
