@@ -9,8 +9,7 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "harp": "^0.30.0",
+  "dependencies": { 
     "serve": "^10.1.2"
   }
 }

@@ -9,6 +9,8 @@ import Solid from "../traits/Solid.js";
 import Physics from "../traits/Physics.js";
 import Basher from "../moves/Basher.js";
 import { loadThunder } from "../moves/Thunderbolt.js";
+import { sound } from "../Sound.js";
+
 
 const FAST_DRAG = 1/5000;
 const SLOW_DRAG = 1/1000;
@@ -23,19 +25,26 @@ class Behavior extends Trait {
         super('behavior');  
         this.direction = 0;
         this.thunderboltsLeft = 0;
-        
+        this.pikaHappy = new sound("../../sounds/Pikaaaa.mp3");
+        this.pikaTired = new sound("../../sounds/PikaPikaTired.mp3");
+        this.pikaDamage = new sound("../../sounds/PikachuDamage.mp3");
+        this.pikaThunder = new sound("../../sounds/PikaThunder.mp3");
+        this.pikaAttack = new sound("../../sounds/Attack.mp3");
             
     }
     collides(us, candidate) {       
         if (candidate.name === 'pokeball') {
            this.updateScore();
+           this.pikaHappy.play();
         }
         if (candidate.name === 'potion') {
             us.health.increaseHealth(10);
+            this.pikaHappy.play();
         }
         if (candidate.name === "thunderstone") {
            // console.log("PIKACHU EVOLVING");
            this.thunderboltsLeft = 3;
+           this.pikaHappy.play();
         }
     }
 
@@ -46,7 +55,8 @@ class Behavior extends Trait {
     update(us, deltaTime) {
       
        if(us.health.getHealth() <= 0) {
-           us.killable.kill();           
+           us.killable.kill(); 
+          
        }
        this.direction = us.go.heading;
 
@@ -78,6 +88,7 @@ class Health extends Trait {
         this.health -= hitFactor;
         this.engageTime = this.damageTime;
         this.direction = direction;
+
     }
     update(entity, deltaTime, level) {
         if(this.engageTime > 0) {           
@@ -111,6 +122,8 @@ function createPikachuFactory(pikachuSprite) {
     const thunderAnim = pikachuSprite.animations.get('thunderbolt-pose');
     const damageAnim = pikachuSprite.animations.get("damage");  
     const deadAnim = pikachuSprite.animations.get('dead'); 
+    
+
 
     function routeFrame(pikachu) {
             if (!pikachu.jump.ready) {               
@@ -120,9 +133,11 @@ function createPikachuFactory(pikachuSprite) {
                 return bashAnim(pikachu.go.distance);
             }
             if (pikachu.health.takingDamage) {
+                pikachu.behavior.pikaDamage.play();
                 return damageAnim(pikachu.health.animationTime);
             }
             if (pikachu.killable.dead) {
+                pikachu.behavior.pikaTired.play();          
                 return "dead";
             }
             if (pikachu.activeMoves.length > 0) {

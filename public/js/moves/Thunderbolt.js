@@ -31,7 +31,7 @@ class Thunderbolt extends AttackMove {
     constructor(name) {
         super(name);
         this.ready = false;
-        this.duration = 0.65;
+        this.duration = 2.5;
         this.engageTime = 0;
         this.animationTime = 0;
         this.amountDamage = 50;
@@ -47,7 +47,7 @@ class Thunderbolt extends AttackMove {
         if(this.engageTime > 0) {
             if(this.ready) {
                 let xpos = entity.facing == 1 ? entity.pos.x + 75 : entity.pos.x - 75; 
-               
+                entity.behavior.pikaThunder.play();
                 this.pos.set(xpos, entity.pos.y);
                 this.ready = false;
             }

@@ -339,18 +339,53 @@
             "pos" : [400, 0]
         }, 
         {
+            "name" : "charizard",
+            "pos" : [800, 0]
+        },
+        {
             "name" : "bulbasaur",
             "pos" : [1100, 0]
         },
         {
             "name" : "squirtle",
             "pos" : [750, 0]
-        },          
+        },        
         
         {
             "name" : "bulbasaur",
             "pos" : [950, 0]
+        },
+
+        {
+            "name" : "squirtle",
+            "pos" : [1080, 0]
+        },
+
+        {
+            "name" : "bulbasaur",
+            "pos" : [1200, 0]
+        },
+        {
+            "name" : "squirtle",
+            "pos" : [1400, 0]
+        },
+        {
+            "name" : "charizard",
+            "pos" : [1600, 0]
+        },
+        {
+            "name" : "squirtle",
+            "pos" : [1850, 0]            
+        },
+        {
+            "name" : "bulbasaur",
+            "pos" : [1950, 0]            
+        },
+        {
+            "name" : "charizard",
+            "pos" : [2250, 0]
         }
+
 
 
     ],

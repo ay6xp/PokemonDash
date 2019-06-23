@@ -5,6 +5,7 @@ import Killable from '../traits/Killable.js';
 import Solid from '../traits/Solid.js';
 import Physics from '../traits/Physics.js';
 import { loadRazorLeaf } from '../moves/RazorLeaf.js';
+import { sound } from '../Sound.js';
 
 export function loadBulbasaur() {
     return loadSpriteSheet('bulbasaur')
@@ -22,6 +23,8 @@ class Behavior extends Trait {
         this.direction = 0;
         this.facing = -1;
         this.prevousX = 0;
+        this.bulbaTired = new sound("../../sounds/bulbatired.mp3");
+        this.bulbaAttack = new sound("../../sounds/bulbarazor.mp3");
     }
     collides(us, them) {
         if(us.killable.dead) {
@@ -29,18 +32,23 @@ class Behavior extends Trait {
         }
         if (them.stomper) {
             if (them.vel.y > us.vel.y) {
-                us.killable.kill();
+                this.bulbaTired.play();
+                us.killable.kill();                
                 us.pendulumRun.speed = 0;
         }
      }
 
         if (them.bash) {          
             if (them.bash.ready) {
+                this.bulbaTired.play();
                 us.killable.kill();
                 us.pendulumRun.speed = 0;
-            }             
+            } 
               
             }
+
+        
+
 
     }       
   
@@ -151,6 +159,7 @@ async function createBulbasaurFactory(sprite) {
                 if(this.state === AttackModes.ATTACKING) {
                     this.activeMoves.push(this.moves[0]);
                     this.activeMoves[0].start(this, candidate);
+                    this.behavior.bulbaAttack.play();
                     this.behavior.refire();
                 }
                

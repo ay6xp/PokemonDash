@@ -5,6 +5,7 @@ import Killable from '../traits/Killable.js';
 import Solid from '../traits/Solid.js';
 import Flying from '../traits/Flying.js';
 import { loadFlameblast } from '../moves/Flameblast.js';
+import { sound } from '../Sound.js';
 
 export function loadCharizard() {
     return loadSpriteSheet('charizard')
@@ -16,6 +17,9 @@ class Behavior extends Trait {
         this.following = false;
         this.direction = 0;
         this.deltaTime = 0;
+        this.charizardAttack = new sound("../../sounds/charizardflame.mp3");
+        this.charizardTired = new sound("../../sounds/charizardtired.mp3");
+
         
     }
 
@@ -66,6 +70,7 @@ async function createCharizardFactory(sprite) {
 
     function routeAnim(charizard) {
         if (charizard.killable.dead) {
+            charizard.behavior.charizardTired.play();
             return 'dead';
         }
         return flyAnim(charizard.lifetime);
@@ -83,6 +88,7 @@ async function createCharizardFactory(sprite) {
             if(this.activeMoves.length == 0 && !candidate.killable.dead) {
             this.activeMoves.push(this.moves[0]);
             this.activeMoves[0].start(this, candidate);
+            this.behavior.charizardAttack.play();
             }
         } else {
             this.behavior.following = false;

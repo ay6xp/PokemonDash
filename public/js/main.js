@@ -74,6 +74,9 @@ async function loadGame(canvas, state) {
              camera.pos.x = Math.max(0,pikachu.pos.x - 100);
              
          }
+         if(pikachu.pos.x >= 3270) {
+             alert("you win! game isn't done yet, but hope you had fun!");
+         }
          level.comp.draw(context, camera);
         } else{
             level.sound.stop();
@@ -87,8 +90,14 @@ async function loadGame(canvas, state) {
  async function loadStartMenu(canvas, state) {
      const context = canvas.getContext('2d');
      const bgImage = await loadImage("/img/pokemondash.jpeg");  
+     const helpImage = await loadImage("/img/howtoplay.jpeg");
      let sound = new Audio("/sounds/opening.mp3");
-     context.drawImage(bgImage, 0, 0);
+      drawStartMenu();
+
+      let startButton = new Button(376, 489, 255, 289);
+      let helpButton = new Button(336,539, 315, 347 );
+      let backButton = new Button(25, 138, 464, 513);
+      let highScoreButton = new Button(345, 546, 368, 544);
 
      function Button(xLeft, xRight, yTop, yBottom) {
          this.xLeft = xLeft;
@@ -98,16 +107,21 @@ async function loadGame(canvas, state) {
          this.checkClicked = function(mouseX, mouseY) {
             if(this.xLeft <= mouseX && this.xRight >= mouseX && this.yTop <= mouseY && this.yBottom >= mouseY) return true;
          }
-     }   
+     }
+     
+     function drawStartMenu() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(bgImage, 0, 0);
+     }
     
-     let startButton = new Button(317, 407, 213, 248);
+
+    
      function clickedScreen(event) {            
          let mouseX = event.pageX - canvas.offsetLeft;
-         let mouseY = event.pageY - canvas.offsetTop;
-         console.log(mouseX, mouseY);
+         let mouseY = event.pageY - canvas.offsetTop;   
+         console.log(mouseX, mouseY);    
          
-        if(startButton.checkClicked(mouseX, mouseY)) {
-            console.log("start button clicked");
+        if(startButton.checkClicked(mouseX, mouseY)) {            
             canvas.width = 256;
             canvas.height = 240; 
             game_state.state = gamestate.PLAYING;
@@ -115,7 +129,19 @@ async function loadGame(canvas, state) {
             loadGame(canvas,state);
             if(!sound.paused) sound.pause();
            
-        } else{
+        } 
+        else if(helpButton.checkClicked(mouseX, mouseY)) {           
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(helpImage, 0, 0);
+        }
+
+        else if (backButton.checkClicked(mouseX, mouseY)) {          
+            drawStartMenu();
+        }  
+        else if (highScoreButton.checkClicked(mouseX, mouseY)) {
+            alert("sorry, not available yet!");
+        }      
+        else{
             if(sound.paused) {
                 sound.play();            
             } else {
@@ -123,12 +149,13 @@ async function loadGame(canvas, state) {
             }
         }
         
+      
         
-     
    
     }
     document.addEventListener("click", clickedScreen);
 }
+
 const canvas = document.getElementById('screen');
 let game_state = {state : gamestate.GAMEMENU};
 loadStartMenu(canvas, game_state);

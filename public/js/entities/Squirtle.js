@@ -5,6 +5,7 @@ import Killable from '../traits/Killable.js';
 import { loadBulbasaur } from './Bulbasaur.js';
 import Solid from '../traits/Solid.js';
 import Physics from '../traits/Physics.js';
+import { sound } from '../Sound.js';
 
 export function loadSquirtle() {
     return loadSpriteSheet('squirtle')
@@ -22,6 +23,9 @@ class Behavior extends Trait {
         this.following = false;
         this.direction = 0;
         this.animationTime = 0;
+        this.squirtleTired  = new sound("../../sounds/squirtletired.mp3");
+        this.squirtleAttack = new sound("../../sounds/squirtleattack.mp3");
+        this.squirtleRevived = new sound("../../sounds/squirtletrevived.mp3");
    
     }
     collides(us, them) {
@@ -51,7 +55,8 @@ class Behavior extends Trait {
     attack(us, them) {     
       if (us.state == AttackModes.DEFAULT){
         us.size.set(34, 20);
-        us.pendulumRun.enabled = true;       
+        us.pendulumRun.enabled = true; 
+        this.squirtleAttack.play();      
         if(them.pos.x > us.pos.x) {
             us.pendulumRun.speed = this.panicSpeed;
         } else {
@@ -74,12 +79,13 @@ class Behavior extends Trait {
     }
 
     handleStomp(us, them) {      
-   
+        this.squirtleTired.play();
         if(us.state === AttackModes.DEFAULT) {
             this.hide(us);
            
-        } else if (us.state === AttackModes.HIDING) {            
-            us.killable.kill();
+        } else if (us.state === AttackModes.HIDING) {           
+            
+            us.killable.kill();            
             us.vel.set(100,-200);         
             us.solid.obstructs = false;
         } else if (us.state === AttackModes.PANIC) {
@@ -87,9 +93,10 @@ class Behavior extends Trait {
         }
     }
      handleNudge(us, them) {        
-      
+        
         if (us.state === AttackModes.DEFAULT && them.state !== AttackModes.ATTACKING) {
             them.killable.kill();
+            this.squirtleTired.play();
         }       
         if (us.state === AttackModes.HIDING){  //this is what is causing problem with squirlle
              // program calling handle nudge right after handle stomp so go from hide to panic state very fast
@@ -115,6 +122,7 @@ class Behavior extends Trait {
     }
 
     unhide(us) {
+        this.squirtleRevived.play();
         us.size.set(34,34);
         us.pendulumRun.enabled = true;
         us.pendulumRun.speed = this.walkSpeed;

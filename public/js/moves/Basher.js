@@ -30,6 +30,7 @@ export default class Basher extends Trait {
        
         if(this.requestTime > 0) {
             if (this.ready) {
+                entity.behavior.pikaAttack.play();
                this.engageTime = this.duration;
                this.requestTime = 0;
                entity.state = AttackModes.ATTACKING;
