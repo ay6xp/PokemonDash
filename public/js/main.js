@@ -89,7 +89,7 @@ async function loadGame(canvas, state) {
 
  async function loadStartMenu(canvas, state) {
      const context = canvas.getContext('2d');
-     const bgImage = await loadImage("/img/pokemondash.jpeg");  
+     const bgImage = await loadImage("/img/pokemondashkeys.jpg");  
      const helpImage = await loadImage("/img/howtoplay.jpeg");
      let sound = new Audio("/sounds/opening.mp3");
       drawStartMenu();
@@ -98,6 +98,7 @@ async function loadGame(canvas, state) {
       let helpButton = new Button(336,539, 315, 347 );
       let backButton = new Button(25, 138, 464, 513);
       let highScoreButton = new Button(345, 546, 368, 544);
+      let helpMenuVisible = false;
 
      function Button(xLeft, xRight, yTop, yBottom) {
          this.xLeft = xLeft;
@@ -118,42 +119,64 @@ async function loadGame(canvas, state) {
     
      function clickedScreen(event) {            
          let mouseX = event.pageX - canvas.offsetLeft;
-         let mouseY = event.pageY - canvas.offsetTop;   
-         console.log(mouseX, mouseY);    
-         
-        if(startButton.checkClicked(mouseX, mouseY)) {            
-            canvas.width = 256;
-            canvas.height = 240; 
-            game_state.state = gamestate.PLAYING;
-            document.removeEventListener("click", clickedScreen);
-            loadGame(canvas,state);
-            if(!sound.paused) sound.pause();
+         let mouseY = event.pageY - canvas.offsetTop;  
+        
+        // if(startButton.checkClicked(mouseX, mouseY)) {            
+        //     canvas.width = 256;
+        //     canvas.height = 240; 
+        //     game_state.state = gamestate.PLAYING;
+        //     document.removeEventListener("click", clickedScreen);
+        //     loadGame(canvas,state);
+        //     if(!sound.paused) sound.pause();
            
-        } 
-        else if(helpButton.checkClicked(mouseX, mouseY)) {           
-            context.clearRect(0, 0, canvas.width, canvas.height);
-            context.drawImage(helpImage, 0, 0);
-        }
+        // } 
+        // else if(helpButton.checkClicked(mouseX, mouseY)) {           
+        //     context.clearRect(0, 0, canvas.width, canvas.height);
+        //     context.drawImage(helpImage, 0, 0);
+        // }
 
-        else if (backButton.checkClicked(mouseX, mouseY)) {          
-            drawStartMenu();
-        }  
-        else if (highScoreButton.checkClicked(mouseX, mouseY)) {
-            alert("sorry, not available yet!");
-        }      
-        else{
+        // else if (backButton.checkClicked(mouseX, mouseY)) {          
+        //     drawStartMenu();
+        // }  
+        // else if (highScoreButton.checkClicked(mouseX, mouseY)) {
+        //     alert("sorry, not available yet!");
+        // }      
+        //else{
             if(sound.paused) {
                 sound.play();            
             } else {
                 sound.pause();
             }
-        }
+        //}
         
       
         
    
     }
+
+    function pressedKey(event) {
+       if(event.code === "KeyP") {
+        canvas.width = 256;
+        canvas.height = 240; 
+        game_state.state = gamestate.PLAYING;
+        document.removeEventListener("keyup", clickedScreen);
+        loadGame(canvas,state);
+        if(!sound.paused) sound.pause();       
+       }
+       else if (event.code === "KeyH") {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(helpImage, 0, 0);
+        helpMenuVisible = true;
+       } else if (event.code === "KeyB" && helpMenuVisible) {
+           helpMenuVisible = false;
+        drawStartMenu();
+       }
+       else if (event.code === "KeyS") {
+        alert("sorry, high scores not available yet!");
+       }
+    }
     document.addEventListener("click", clickedScreen);
+    document.addEventListener("keyup", pressedKey);
 }
 
 const canvas = document.getElementById('screen');
