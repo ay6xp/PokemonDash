@@ -1,0 +1,51 @@
+{
+    "objects": 
+    [
+        {
+        "object_name": "pokeball",
+        "frames" :
+        [
+            {
+                "name" : "pokeball-1",
+                "rect" : [114, 11, 16, 17]
+            },
+            {
+                "name" : "pokeball-open",
+                "rect" : [148, 4, 16, 23]
+            }
+        ],
+        "animations" : [
+            {
+                "name" : "open",
+                "frameLen" : 0.15,
+                "frames" : [
+                    "pokeball-1"              
+                ]
+            }
+        ]
+
+        },
+        {
+            "object_name" : "potion",
+            "frames" :
+            [
+                {
+                    "name" : "potion-1",
+                    "rect" : [4, 34, 8, 12]
+                }
+            ]
+        },
+        {
+            "object_name" : "thunderstone",
+            "frames" : 
+            [
+                {
+                    "name" : "thunderstone-1",
+                    "rect" : [1, 1, 16, 15]
+                }
+            ]
+        }
+    ]  
+    
+
+}

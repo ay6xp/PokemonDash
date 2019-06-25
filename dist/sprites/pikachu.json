@@ -1,0 +1,203 @@
+{
+    "imageURL": "./img/pikachu.png",
+    "frames" : [
+        {
+            "name": "idle",
+            "rect": [5,30,40,40]
+        },
+        
+        {
+            "name": "run-1",
+            "rect":
+            [
+                5,
+                158,
+                53,
+                42
+            ]
+        },
+        {
+            "name": "run-2",
+            "rect": 
+            [
+                61,
+                162,
+                55,
+                40
+            ]
+        },
+        {
+            "name": "run-3",
+            "rect": 
+            [
+                120,
+                163,
+                50,
+                40
+            ]
+        },
+        {
+            "name": "run-4",
+             "rect":
+            [
+                 173,
+                 165,
+                 58,
+                 37
+            ]            
+
+        },
+        {            
+                
+        "name": "jump-1",
+        "rect" :
+            [
+                10,
+                415,
+                37,
+                52                
+            ]
+              
+        },
+        {            
+                
+         "name": "jump-2",
+         "rect" :
+         [
+                49,
+                419,
+                48,
+                47                
+         ]
+                  
+        },
+        {            
+                
+         "name": "jump-3",
+         "rect" :
+         [
+                98,
+                415,
+                34,
+                50                
+         ]
+                  
+        },
+        {            
+                
+         "name": "jump-4",
+         "rect" :
+         [
+                136,
+                417,
+                45,
+                47                
+         ]
+                  
+        },
+        {
+            "name" : "skull-1",
+            "rect" : [9, 354, 53, 41]
+
+        },
+        {
+            "name" : "skull-2",
+            "rect" : [63, 356, 54, 40]
+        },
+        {
+            "name" : "skull-3",
+            "rect" : [119, 358, 54, 38]
+        },
+        {
+            "name": "skull-4",
+            "rect" : [175, 360, 61, 36]
+        }, 
+        {
+            "name" : "thunder-pose-1",
+            "rect" : [15, 283, 48, 49]
+        },
+        {
+            "name" : "thunder-pose-2",
+            "rect" : [66, 286, 43, 46]
+        },
+        {
+            "name" : "thunder-pose-3",
+            "rect" : [114, 274, 45, 62]
+        },
+        {
+            "name" : "damage-1",
+            "rect" : [4, 484, 61, 51]
+        },
+        {
+            "name" : "damage-2",
+            "rect" : [69, 486, 62, 49]
+        },
+        {
+            "name" : "dead",
+            "rect" : [132, 489, 68, 46]
+        }
+       
+    ],
+     "animations": [
+         {
+             "name" : "run",
+             "frameLen" : 10,
+             "frames" : [
+                 "run-1",
+                 "run-2",
+                 "run-3",
+                 "run-4"
+             ]
+         },
+         {
+             "name": "jump",
+             "frameLen": 10,
+             "frames": [
+                 "jump-1",
+                 "jump-2",
+                 "jump-3",
+                 "jump-4"
+             ]
+           
+         },
+         {
+             "name" : "bash",
+             "frameLen" : 20,
+             "frames" : [
+                 "skull-1",
+                 "skull-2",
+                 "skull-3",
+                 "skull-4"
+             ]
+         },
+         {
+             "name" : "thunderbolt-pose",
+             "frameLen": 10,
+             "frames" : [
+                 "thunder-pose-1",
+                 "thunder-pose-2",
+                 "thunder-pose-3"        
+             ]
+         },
+         {
+             "name" : "damage",
+             "frameLen" : 0.15,
+             "frames" : [
+                 "damage-2",
+                 "damage-2",
+                 "damage-2",
+                 "damage-2"
+             ]
+         },
+         {
+             "name" : "dead",
+             "frameLen" : 0.15,
+             "frames" : [
+                 "damage-1",
+                 "damage-2",
+                 "dead"
+             ]
+         }         
+     ]
+  
+}

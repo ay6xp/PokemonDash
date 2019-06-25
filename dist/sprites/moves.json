@@ -1,0 +1,122 @@
+{
+    "moves" :  [
+        {
+            "name" : "thunderbolt",  
+            "imageURL" : "./img/thunder.png",        
+            "frames" : [
+            {
+                "name": "thunder-attack-1",
+                "rect": [5, 1, 23, 130]
+            },
+            {
+                "name": "thunder-attack-2",
+                "rect": [36, 3, 20, 126]
+            },
+            {
+                "name": "thunder-attack-3",
+                "rect": [62, 5, 32, 123]
+            },
+            {
+                "name": "thunder-attack-4",
+                "rect": [97, 6, 35, 122]
+            },
+            {
+                "name": "thunder-attack-5",
+                "rect": [135, 5, 40, 122]
+            }          
+
+            ],
+            "animations" : 
+            {
+                "name" : "thunderbolt-attack",
+                "frameLen": 0.15,
+                "frames" : [
+                    "thunder-attack-1",
+                    "thunder-attack-2",                 
+                    "thunder-attack-3",
+                    "thunder-attack-4",                                       
+                    "thunder-attack-5",
+                    "thunder-attack-5"
+                ]
+            } 
+        },
+        {
+            "name": "flameblast",
+            "imageURL" : "./img/flameblast.png",
+            "frames" : [
+            {
+                "name" : "flameblast-1",
+                "rect" : [551, 150, 14, 26]        
+            },
+            {
+                "name" : "flameblast-2",
+                "rect" : [581, 149, 34, 29]
+            },
+            {
+                "name" : "flameblast-3",
+                "rect" : [633, 150, 34, 32]
+            },
+            {
+                "name" : "flameblast-4",
+                "rect" : [683, 146, 41, 41]
+            },
+            {
+                "name" : "flameblast-5",
+                "rect" : [747, 147, 63, 45]
+            }
+
+            ], 
+            "animations" :
+            {
+                "name" : "flameblast-attack",
+                "frameLen" : 0.15,
+                "frames" : [
+                    "flameblast-1",
+                    "flameblast-2",
+                    "flameblast-3",
+                    "flameblast-4",
+                    "flameblast-5"
+                ]
+            }
+        },
+        {
+            "name" : "razor-leaf",
+            "imageURL" : "./img/razorleaf.png",
+            "frames" : [
+                {
+                    "name" : "razor-leaf-1",
+                    "rect" : [1, 1.25, 17.75, 18]
+                },
+                {
+                    "name" : "razor-leaf-2",
+                    "rect" : [19.25, 1.25, 15.5, 18.5]
+                },
+
+                 {
+                    "name" : "razor-leaf-3",
+                    "rect" : [35.25, 1.5, 15.25, 18.25]
+                },
+                {
+                    "name" : "razor-leaf-4",
+                    "rect" : [51, 2, 17, 18]
+                }
+
+            ],
+            "animations" :
+            {
+                "name" : "razor-leaf-attack",
+                "frameLen" : 0.15,
+                "frames" : [
+                    "razor-leaf-1",
+                    "razor-leaf-2",  
+                    "razor-leaf-3",
+                    "razor-leaf-4"
+                    
+                ]
+            }
+        }
+
+    ]
+
+}
+
