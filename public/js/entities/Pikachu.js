@@ -38,8 +38,8 @@ class Behavior extends Trait {
            this.pikaHappy.play();
         }
         if (candidate.name === 'potion') {
-            us.health.increaseHealth(10);
-            this.pikaHappy.play();
+            us.health.increaseHealth(5);
+            this.pikaHappy.play();            
         }
         if (candidate.name === "thunderstone") {
            // console.log("PIKACHU EVOLVING");
