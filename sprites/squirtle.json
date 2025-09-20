@@ -1,0 +1,113 @@
+{
+    "imageURL" : "./img/squirtle.png",
+    "frames" : 
+    [
+        {
+            "name": "idle", 
+            "rect" : [1.5, 1, 37, 37]
+        },
+        {
+            "name" : "run-1",
+            "rect": [1, 107, 37, 37]
+        },
+        {
+            "name" : "run-2",
+            "rect": [39.25, 109, 37.25, 38.75]
+        },
+        {
+            "name": "run-3",
+            "rect": [78, 109.5, 37.75, 40.5]
+        },
+        {
+            "name": "run-4",
+            "rect": [116.5, 110.25, 36.5, 40.5]
+        },
+        {
+            "name": "run-5",
+            "rect": [153.5, 107, 37.75, 44]
+        },
+        {
+            "name": "run-6",
+            "rect": [192.25, 107, 38.25, 45.5]
+        },
+        {
+            "name" : "hiding",
+            "rect" : [124, 155, 24, 26]
+        },
+        {
+            "name": "hide-wake",
+            "rect" : [39, 149, 36, 26]
+        },
+        {
+            "name": "spin-1",
+            "rect":[ 76, 152.5, 23, 25]
+        },
+        {
+            "name": "spin-2",
+            "rect" : [100, 154, 25.5, 23.5]  
+        },
+        {
+            "name": "spin-3",
+            "rect" : [126, 155, 20.5, 24]  
+        },
+        {
+            "name": "spin-4",
+            "rect" : [147, 155, 25, 25]
+        },
+        {
+            "name": "spin-5",
+            "rect" : [173, 154.5, 22.5, 26]
+        },
+        {
+            "name": "spin-6",
+            "rect" : [196, 155, 24.5, 26]
+        },
+        {
+            "name": "spin-7",
+            "rect" : [221.5, 155, 22, 26.5]
+        },
+        {
+            "name": "spin-8",
+            "rect" : [244, 156, 26, 26]
+        }
+
+    ],
+    "animations": [
+        {
+            "name" : "run",
+            "frameLen" : 0.15,
+            "frames" : [
+                "run-1",
+                "run-2",
+                "run-3",
+                "run-4",
+                "run-5",
+                "run-6"
+            ]
+        },
+        {
+            "name" : "wake",
+            "frameLen": 0.15,
+            "frames" : [
+                "hiding",
+                "hide-wake"
+            ]
+        }, 
+        {
+            "name" : "spin",
+            "frameLen" : 0.15,
+            "frames" : [
+                "spin-1",
+                "spin-2",
+                "spin-3",
+                "spin-4",
+                "spin-5",
+                "spin-6",
+                "spin-7",
+                "spin-8"
+            ]
+        }
+    ]
+ 
+}
+

@@ -1,0 +1,93 @@
+{
+    "imageURL" : "./img/bulbasaur.png", 
+    "frames" : 
+    [
+        {
+            "name": "idle-1", 
+            "rect" : [4, 38.25, 34.75, 32.25]
+        },
+        {
+            "name": "idle-2",
+            "rect": [39, 40, 32, 32]
+        },
+        {
+            "name": "idle-3",
+            "rect" : [ 72, 40, 40, 32]
+        },
+        {
+            "name": "idle-4",
+            "rect": [37, 165, 36, 32]
+        },
+        {
+            "name": "idle-5",
+            "rect": [73, 166, 35, 32]
+        },
+        {
+            "name" : "run-1",
+            "rect": [5.25, 102.25, 35, 31.25]
+        },
+        {
+            "name" : "run-2",
+            "rect": [41.75, 99.5, 34, 33.75]
+        },
+        {
+            "name": "run-3",
+            "rect": [76.75, 99, 32, 35]
+        },
+        {
+            "name": "run-4",
+            "rect": [111.75, 98, 35, 36.75]
+        },
+        {
+            "name": "run-5",
+            "rect": [146.75, 97.5, 35, 37.5]
+        },
+        {
+            "name": "dead",
+            "rect": [5, 71, 35, 30]
+        },
+        {
+            "name" : "tackle",
+            "rect" : [334, 114, 53, 44]
+        },        
+        {
+            "name" : "razor-leaf-attack-1",
+            "rect" : [400, 34, 39, 40]
+        },
+        {
+            "name" : "razor-leaf-attack-2",
+            "rect" : [355, 35, 42, 38]
+        },
+        {
+            "name" : "razor-leaf-attack-3",
+            "rect" : [316, 33, 37, 40]
+        }
+
+    ],
+    "animations": [
+        {
+            "name" : "run",
+            "frameLen" : 0.15,
+            "frames" : [
+              "run-1",
+              "run-2",
+              "run-3",
+              "run-4",
+              "run-5"            
+            
+            ]
+        },
+        {
+            "name" : "razor-leaf-pose",
+            "frameLen" : 0.25,
+            "frames" : [        
+               
+                "razor-leaf-attack-1",                
+                "razor-leaf-attack-3"
+                          
+                            
+            ]
+        }
+    ]
+ 
+}
